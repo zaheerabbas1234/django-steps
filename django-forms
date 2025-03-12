@@ -2,10 +2,10 @@ form_template.html
 ===============
 <html>
 <head> 
-    <title>Sample Form</title>
+    <h2>Fill Out the Form</h2>
 </head>
 <body>
-    <h2>Fill Out the Form</h2>
+    
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
@@ -39,7 +39,7 @@ success.html
 </html>
 
 =====================================
-in app (form.py)
+in app (forms.py)
 ============
 from django import forms
 
@@ -48,7 +48,6 @@ class SampleForm(forms.Form):
     email =   forms.EmailField  (label="Email Address", required=True)
     age =     forms.IntegerField(label="Age",           required=False, min_value=1)
     message = forms.CharField   (widget=forms.Textarea, label="Your Message", required=True)
-
 ==================================================
 views.py
 =======
@@ -77,16 +76,17 @@ def sample_view(request):
 def home_view(request):
     return render(request, 'home.html')
 
+
+
 ================================================================
 urls.py
 ============
 from django.contrib import admin
 from django.urls import path
-from myapp.views import sample_view, home_view  # Import home_view
+from myapp.views import sample_view, home_view  
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('form/', sample_view, name='sample_form'),
-    path('', home_view, name='home'),  # Set home page
+    path('', home_view, name='home'),  
 ]
-
