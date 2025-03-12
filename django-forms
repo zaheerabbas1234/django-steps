@@ -1,3 +1,41 @@
+step 1:
+=======
+start the project by using following command
+python -m django startproject myproject
+
+step 2:
+======
+cd myproject
+
+step 3:
+=======
+create the app by using following command
+
+python manage.py startapp myapp
+
+step 4:
+=======
+
+register the app in settings.py
+===============================
+
+installed apps=[
+'myapp',
+]
+
+step 5:
+=======
+
+right click on myapp create a new folder folder name is templates
+
+step 6:
+======
+right click on templates create a new file
+
+file name is : form_template.html
+
+and write the following code 
+
 form_template.html
 ===============
 <html>
@@ -14,6 +52,15 @@ form_template.html
 </body>
 </html>
 
+==================================================
+step 7:
+========
+
+right click on templates create a new file
+file name is : home.html
+
+and write the following code 
+
 =========================
 home.html
 =========
@@ -27,6 +74,15 @@ home.html
 </html>
 
 ==================================
+
+step 8:
+=======
+
+right click on templates create a new file
+file name is : success.html
+
+and write the following code 
+
 success.html
 ===========
 <html>
@@ -39,16 +95,30 @@ success.html
 </html>
 
 =====================================
-in app (forms.py)
+
+step 9:
+=======
+
+right click on myapp create a new file. file name is forms.py
+
+write the following code 
+
+forms.py
 ============
 from django import forms
 
 class SampleForm(forms.Form):
-    name =    forms.CharField   (label="Full Name",     max_length=100, required=True)
+    name =    forms.CharField   (label="Full Name",     required=True)
     email =   forms.EmailField  (label="Email Address", required=True)
-    age =     forms.IntegerField(label="Age",           required=False, min_value=1)
+    age =     forms.IntegerField(label="Age",           required=True)
     message = forms.CharField   (widget=forms.Textarea, label="Your Message", required=True)
 ==================================================
+
+step 10:
+========
+
+open views.py write the following code 
+======================================
 views.py
 =======
 from django.shortcuts import render
@@ -79,6 +149,12 @@ def home_view(request):
 
 
 ================================================================
+
+step 11:
+========
+open urls.py and write the following code
+========================================
+
 urls.py
 ============
 from django.contrib import admin
@@ -90,3 +166,9 @@ urlpatterns = [
     path('form/', sample_view, name='sample_form'),
     path('', home_view, name='home'),  
 ]
+
+step 12:
+=======
+run the server by using following command
+=========================================
+python manage.py runserver
