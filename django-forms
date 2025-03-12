@@ -1,0 +1,92 @@
+form_template.html
+===============
+<html>
+<head> 
+    <title>Sample Form</title>
+</head>
+<body>
+    <h2>Fill Out the Form</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+
+=========================
+home.html
+=========
+<html>
+<head>
+    <h1>Welcome to My Django App!</h1>
+</head>
+<body>   
+    <p><a href="{% url 'sample_form' %}">Go to the Form</a></p>
+</body>
+</html>
+
+==================================
+success.html
+===========
+<html>
+<head>
+    <title>Success</title>
+</head>
+<body>
+    <h2>Thank you, {{ name }}! Your form has been submitted successfully.</h2>
+</body>
+</html>
+
+=====================================
+in app (form.py)
+============
+from django import forms
+
+class SampleForm(forms.Form):
+    name =    forms.CharField   (label="Full Name",     max_length=100, required=True)
+    email =   forms.EmailField  (label="Email Address", required=True)
+    age =     forms.IntegerField(label="Age",           required=False, min_value=1)
+    message = forms.CharField   (widget=forms.Textarea, label="Your Message", required=True)
+
+==================================================
+views.py
+=======
+from django.shortcuts import render
+from .forms import SampleForm  # Ensure this file exists
+
+def sample_view(request):
+    if request.method == "POST":
+        form = SampleForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            age = form.cleaned_data['age']
+            message = form.cleaned_data['message']
+
+            print(f"Received: {name}, {email}, {age}, {message}")
+            return render(request, 'success.html', {'name': name})
+
+    else:
+        form = SampleForm()
+
+    return render(request, 'form_template.html', {'form': form})
+
+
+
+def home_view(request):
+    return render(request, 'home.html')
+
+================================================================
+urls.py
+============
+from django.contrib import admin
+from django.urls import path
+from myapp.views import sample_view, home_view  # Import home_view
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('form/', sample_view, name='sample_form'),
+    path('', home_view, name='home'),  # Set home page
+]
+
