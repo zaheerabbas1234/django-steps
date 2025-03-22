@@ -1,0 +1,208 @@
+TABLES-GRIDS
+===========
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+
+    <h2 class="text-center">User Table</h2>
+    
+    <!-- Bootstrap Table -->
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for person in data %}
+            <tr>
+                <td>{{ person.id }}</td>
+                <td>{{ person.name }}</td>
+                <td>{{ person.age }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2 class="text-center mt-5">Bootstrap Grid Example</h2>
+
+    <!-- Bootstrap Grid -->
+    <div class="row">
+        {% for person in data %}
+        <div class="col-md-4">
+            <div class="card text-center p-3 mb-3 shadow">
+                <h5>{{ person.name }}</h5>
+                <p>Age: {{ person.age }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
+
+
+CAROUSEL-IMAGES  FEATURE
+3. Add the following code to index.html to create a simple Bootstrap carousel: 
+
+<html >
+
+<head> 
+
+<title>Simple Carousel</title> 
+{% load static %} 
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" 
+rel="stylesheet"> 
+
+</head> 
+
+<body> 
+
+<div class="container mt-5"> 
+
+<div id="carouselExample" class="carousel slide" data-bs-ride="carousel"> 
+
+<div class="carousel-inner"> 
+
+<div class="carousel-item active"> 
+
+<img src="{% static 'images/image1.jpg' %}" class="d-block w-100" alt="..."> 
+
+</div> 
+
+<div class="carousel-item"> 
+
+<img src="{% static 'images/image2.jpg' %}" class="d-block w-100" alt="..."> 
+
+</div> 
+
+<div class="carousel-item"> 
+
+<img src="{% static 'images/image3.jpg' %}" class="d-block w-100" alt="..."> 
+
+</div> 
+
+</div> 
+
+<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs 
+slide="prev"> 
+
+<span class="carousel-control-prev-icon" aria-hidden="true"></span> 
+
+<span class="visually-hidden">Previous</span> 
+
+</button> 
+
+<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs 
+slide="next"> 
+
+<span class="carousel-control-next-icon" aria-hidden="true"></span> 
+<span class="visually-hidden">Next</span> 
+
+</button> 
+
+</div> 
+
+</div> 
+
+<!-- Bootstrap JS --> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script> 
+
+</body> 
+
+</html>
+
+REGISTRATION-PAGE
+Register.html
+
+<html>
+<head>
+    <title>Register</title>
+</head>
+<body>
+    <h1>Register</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Register</button>
+    </form>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <a href="{% url 'login' %}">Already have an account? Login</a>
+</body>
+</html>
+
+home.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to Home Page</h1>
+    
+    {% if user %}
+        <p>✅ You are logged in as <strong>{{ user }}</strong></p>
+        <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        <p>❌ You are not logged in</p>
+        <a href="{% url 'login' %}">Login</a> | 
+        <a href="{% url 'register' %}">Register</a>
+    {% endif %}
+</body>
+</html>
+
+
+Login.html
+--------------
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <a href="{% url 'register' %}">Don't have an account? Register</a>
+</body>
+</html>
+
+
+
+
+Boot-strap
+Home.html
+<html>
+    <head>
+        <title>My Django Page</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body class="text-center mt-5">
+        <h1>Welcome to My Django App</h1>
+        <p>This is a simple page styled with Bootstrap.</p>
+        <a class="btn btn-primary" href="#" role="button">Learn More</a>
+
+       
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    </body>
+</html>
+
+
+
