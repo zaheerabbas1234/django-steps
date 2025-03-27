@@ -23,3 +23,30 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+=========================================================================================
+<html>
+<head>
+    <h1>Simple Carousel</h1>
+    {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div>
+        <div data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{% static 'images/image1.jpg' %}">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'images/image2.jpg' %}">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'images/image3.jpg' %}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
