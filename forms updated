@@ -1,0 +1,173 @@
+step 1:
+=======
+start the project by using following command
+python -m django startproject formsproject
+
+step 2:
+======
+cd formsproject
+
+step 3:
+=======
+create the app by using following command
+
+python manage.py startapp formsapp
+
+step 4:
+=======
+
+register the app in settings.py
+===============================
+
+installed apps=[
+'formsapp',
+]
+
+step 5:
+=======
+
+right click on myapp create a new folder folder name is templates
+
+step 6:
+======
+right click on templates create a new file
+
+file name is : form_template.html
+
+and write the following code 
+
+form_template.html
+===============
+<html>
+<head> 
+    <h2>Fill Out the Form</h2>
+</head>
+<body>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+          <button>SUBMIT</button>
+    </form>
+</body>
+</html>
+
+==================================================
+step 7:
+========
+
+right click on templates create a new file
+file name is : home.html
+
+and write the following code 
+
+=========================
+home.html
+=========
+<html>
+<head>
+    <h1>Welcome to My Django App!</h1>
+</head>
+<body>   
+    <p><a href="{% url 'sample_view' %}">Go to the Form</a></p>
+</body>
+</html>
+
+==================================
+
+step 8:
+=======
+
+right click on templates create a new file
+file name is : success.html
+
+and write the following code 
+
+success.html
+===========
+<html>
+<head>
+    <title>Success</title>
+</head>
+<body>
+    <h2>Thank you, {{ name }}! Your form has been submitted successfully.</h2>
+</body>
+</html>
+
+=====================================
+
+step 9:
+=======
+
+right click on myapp create a new file. file name is forms.py
+
+write the following code 
+
+forms.py
+============
+from django import forms
+
+class SampleForm(forms.Form):
+    name=forms.CharField(label='fullname')
+    email=forms.EmailField(label='email')
+    age=forms.IntegerField(label='age')
+    message=forms.CharField(label='message')
+==================================================
+
+step 10:
+========
+
+open views.py write the following code 
+======================================
+views.py
+=======
+from django.shortcuts import render
+from .forms import SampleForm  # Ensure this file exists
+
+def sample_view(request):
+    if request.method == "POST":
+        form = SampleForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            age = form.cleaned_data['age']
+            message = form.cleaned_data['message']
+
+            print(f"Received: {name}, {email}, {age}, {message}")
+            return render(request, 'success.html', {'name': name})
+
+    else:
+        form = SampleForm()
+
+    return render(request, 'form_template.html', {'form': form})
+
+
+
+def home_view(request):
+    return render(request, 'home.html')
+
+
+
+================================================================
+
+step 11:
+========
+open urls.py and write the following code
+========================================
+
+urls.py
+============
+from django.contrib import admin
+from django.urls import path
+from formsapp import views   
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('form/', views.sample_view, name='sample_view'),
+    path('', views.home_view, name='home_view'),  
+]
+step 12:
+=======
+run the server by using following command
+=========================================
+python manage.py runserver
