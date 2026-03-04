@@ -1,3 +1,17 @@
+single image code
+=========================================================================================================
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Full Screen</title>
+</head>
+<body>
+    <img src="{% static 'images/image1.jpg' %}" >
+</body>
+</html>
+===============================================
+
 <html>
 <head>
     <title>Simple Carousel</title>
