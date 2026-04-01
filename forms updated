@@ -1,3 +1,7 @@
+Aim:
+=======================================
+Create a sample form using Django Forms
+========================================
 step 1:
 =======
 start the project by using following command
@@ -26,7 +30,7 @@ installed apps=[
 step 5:
 =======
 
-right click on myapp create a new folder folder name is templates
+right click on formsapp create a new folder folder name is templates
 
 step 6:
 ======
